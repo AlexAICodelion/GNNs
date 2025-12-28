@@ -38,9 +38,9 @@ In addition, the explanations are validated with **fidelity tests** (deletion/in
 
             Implements and trains:
             
-            MLP baseline: two fully connected layers (no graph structure).
-            
-            GCN model: two GCNConv layers with neighbor aggregation (uses graph structure).
+                        MLP baseline: two fully connected layers (no graph structure).
+                        
+                        GCN model: two GCNConv layers with neighbor aggregation (uses graph structure).
             
             Typical training setup:
 
