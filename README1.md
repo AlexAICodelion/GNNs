@@ -29,28 +29,28 @@ PyG(pytorch_geometric) address：https://github.com/pyg-team/pytorch_geometric?t
 
 KarateClub() 载入 Zachary’s Karate Club 经典小图数据。
 
-打印：
-
-len(dataset)：这个数据集里有多少张图（KarateClub 通常只有 1 张图）
-
-dataset.num_features：每个节点的输入特征维度（KarateClub 数据集默认给每个节点配置的特征表示的维度）
-
-dataset.num_classes：标签类别数
+        打印：
+        
+        len(dataset)：这个数据集里有多少张图（KarateClub 通常只有 1 张图）
+        
+        dataset.num_features：每个节点的输入特征维度（KarateClub 数据集默认给每个节点配置的特征表示的维度）
+        
+        dataset.num_classes：标签类别数
 
 
 2、取出唯一那张图，查看 Data 对象
 
 <img width="738" height="57" alt="image" src="https://github.com/user-attachments/assets/cbbc39ce-13ee-4148-9afd-6605acbda378" />
 
-print(data) 会打印 PyG 的 Data(...) 概览，通常包含：
-
-x：节点特征矩阵（形状大致是 [num_nodes, num_features]）
-
-edge_index：边列表（形状 [2, num_edges]）
-
-y：节点标签（形状 [num_nodes]）
-
-还有 train_mask/test_mask（看数据集是否自带划分）
+        print(data) 会打印 PyG 的 Data(...) 概览，通常包含：
+        
+        x：节点特征矩阵（形状大致是 [num_nodes, num_features]）
+        
+        edge_index：边列表（形状 [2, num_edges]）
+        
+        y：节点标签（形状 [num_nodes]）
+        
+        还有 train_mask/test_mask（看数据集是否自带划分）
 
 
 3、把边列表打印出来看清楚“谁连谁”，也就是说谁和谁有关系
@@ -71,61 +71,61 @@ visualize_graph：把节点画出来，并按真实标签 data.y 上色。
 
 <img width="642" height="639" alt="image" src="https://github.com/user-attachments/assets/17da5e61-dd8d-4bd8-aa10-e7b8ccf107d1" />
 
-三层 GCNConv 的含义（严格对应你的实现）：
-
-        第 1 层：把每个节点从 num_features 维映射到 4 维，并融合 1-hop 邻域信息
+        三层 GCNConv 的含义（严格对应你的实现）：
         
-        第 2 层：4 → 4，再融合一次邻域信息（感受野扩大）
-        
-        第 3 层：4 → 2，输出 2 维嵌入（方便直接二维散点图可视化）
+                第 1 层：把每个节点从 num_features 维映射到 4 维，并融合 1-hop 邻域信息
+                
+                第 2 层：4 → 4，再融合一次邻域信息（感受野扩大）
+                
+                第 3 层：4 → 2，输出 2 维嵌入（方便直接二维散点图可视化）
 
-classifier = Linear(2, num_classes)：把 2 维嵌入映射成类别 logits（每个节点输出 num_classes 维得分）。
+        classifier = Linear(2, num_classes)：把 2 维嵌入映射成类别 logits（每个节点输出 num_classes 维得分）。
 
-打印 model ：是核对结构（层数、维度）
+        打印 model ：是核对结构（层数、维度）
 
 <img width="761" height="188" alt="image" src="https://github.com/user-attachments/assets/ac8bda45-8c91-4ff9-9e41-fb743cacf40a" />
 
 
 6、不训练，直接前向一次，并把 2D embedding 画出来，结果由随机初始化权重 + 图结构 + 节点特征共同决定
 
-model(...)：对整张图前向传播一次，得到：
-
-        out：分类 logits（你这里丢掉不用）
+        model(...)：对整张图前向传播一次，得到：
         
-        h：2 维节点嵌入（你用来画图）
-
-visualize_embedding(...)：按真实标签上色，看看随机初始化的嵌入分布长什么样。
+                out：分类 logits（你这里丢掉不用）
+                
+                h：2 维节点嵌入（你用来画图）
+        
+        visualize_embedding(...)：按真实标签上色，看看随机初始化的嵌入分布长什么样。
 
 <img width="876" height="909" alt="image" src="https://github.com/user-attachments/assets/2d389dd3-3975-45ce-bf70-350e14e4394c" />
 
 
 7、训练 GCN，并每 10 个 epoch 画一次 embedding
 
-定义损失函数：交叉熵 CrossEntropyLoss（用于多分类）。
+            定义损失函数：交叉熵 CrossEntropyLoss（用于多分类）。
+            
+            定义优化器：Adam，更新模型参数。
+            
+            train(data) 做一轮训练：
+            
+                  1）清梯度
+                  
+                  2）前向得到 out（logits）和 h（embedding）
+                  
+                  3）用 data.train_mask 选出“训练节点”子集，计算这些节点的交叉熵损失
+                  
+                  4）反向传播 + 参数更新
+              
+            训练 401 轮，每 10 轮画一次当前 h 的二维嵌入，并在 x 轴标签上写 epoch 与 loss。
 
-定义优化器：Adam，更新模型参数。
-
-train(data) 做一轮训练：
-
-      1）清梯度
-      
-      2）前向得到 out（logits）和 h（embedding）
-      
-      3）用 data.train_mask 选出“训练节点”子集，计算这些节点的交叉熵损失
-      
-      4）反向传播 + 参数更新
-  
-训练 401 轮，每 10 轮画一次当前 h 的二维嵌入，并在 x 轴标签上写 epoch 与 loss。
-
-其中：
-
-  loss 只在 train_mask 对应的那些节点上计算：
-  
-    训练节点的真实标签 data.y[train_mask]
-    
-    训练节点的预测 logits out[train_mask]
-    
-模型之所以能利用“未标注节点的信息”，来自 GCNConv 的邻域聚合：即便某些节点不在 mask 里，它们仍会通过图结构影响邻居的信息传播。
+            其中：
+            
+              loss 只在 train_mask 对应的那些节点上计算：
+              
+                训练节点的真实标签 data.y[train_mask]
+                
+                训练节点的预测 logits out[train_mask]
+                
+            模型之所以能利用“未标注节点的信息”，来自 GCNConv 的邻域聚合：即便某些节点不在 mask 里，它们仍会通过图结构影响邻居的信息传播。
 
 <img width="831" height="863" alt="image" src="https://github.com/user-attachments/assets/213fabc6-8fd9-43e9-af51-5012cca8605f" />
 
