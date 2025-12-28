@@ -2,7 +2,7 @@
 
 This repository documents a hands-on study of **Graph Neural Network (GNN) explainability** on the Cora node classification benchmark using **PyTorch Geometric (PyG)**.
 
-The workflow starts from training **MLP vs. GCN** as a baseline comparison, and then applies **post-hoc**,** mask-based explanations (PyG Explainer)** to interpret **node predictions** through both:
+The workflow starts from training **MLP vs. GCN** as a baseline comparison, and then applies **post-hoc**,**mask-based explanations (PyG Explainer)** to interpret **node predictions** through both:
 
             Feature attributions (node_mask)
             
