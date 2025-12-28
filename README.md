@@ -74,11 +74,11 @@ visualize_graph：把节点画出来，并按真实标签 data.y 上色。
 
 三层 GCNConv 的含义（严格对应你的实现）：
 
-第 1 层：把每个节点从 num_features 维映射到 4 维，并融合 1-hop 邻域信息
-
-第 2 层：4 → 4，再融合一次邻域信息（感受野扩大）
-
-第 3 层：4 → 2，输出 2 维嵌入（方便直接二维散点图可视化）
+        第 1 层：把每个节点从 num_features 维映射到 4 维，并融合 1-hop 邻域信息
+        
+        第 2 层：4 → 4，再融合一次邻域信息（感受野扩大）
+        
+        第 3 层：4 → 2，输出 2 维嵌入（方便直接二维散点图可视化）
 
 classifier = Linear(2, num_classes)：把 2 维嵌入映射成类别 logits（每个节点输出 num_classes 维得分）。
 
@@ -91,9 +91,9 @@ classifier = Linear(2, num_classes)：把 2 维嵌入映射成类别 logits（�
 
 model(...)：对整张图前向传播一次，得到：
 
-    out：分类 logits（你这里丢掉不用）
-    
-    h：2 维节点嵌入（你用来画图）
+        out：分类 logits（你这里丢掉不用）
+        
+        h：2 维节点嵌入（你用来画图）
 
 visualize_embedding(...)：按真实标签上色，看看随机初始化的嵌入分布长什么样。
 
@@ -108,13 +108,13 @@ visualize_embedding(...)：按真实标签上色，看看随机初始化的嵌�
 
 train(data) 做一轮训练：
 
-  1）清梯度
-  
-  2）前向得到 out（logits）和 h（embedding）
-  
-  3）用 data.train_mask 选出“训练节点”子集，计算这些节点的交叉熵损失
-  
-  4）反向传播 + 参数更新
+      1）清梯度
+      
+      2）前向得到 out（logits）和 h（embedding）
+      
+      3）用 data.train_mask 选出“训练节点”子集，计算这些节点的交叉熵损失
+      
+      4）反向传播 + 参数更新
   
 训练 401 轮，每 10 轮画一次当前 h 的二维嵌入，并在 x 轴标签上写 epoch 与 loss。
 
