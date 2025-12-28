@@ -10,7 +10,7 @@ The workflow starts from training **MLP vs. GCN** as a baseline comparison, and 
 
 In addition, the explanations are validated with **fidelity tests** (deletion/insertion), and compared on a **correctly predicted node** and a **misclassified node**.
 
-##**Dataset**
+## **Dataset**
 
             **Cora (Planetoid)**
             
@@ -24,7 +24,7 @@ In addition, the explanations are validated with **fidelity tests** (deletion/in
             
             Masks: train_mask, val_mask, test_mask
 
-##**Project Structure (Notebooks)**
+## **Project Structure (Notebooks)**
 
 **1）PyG.ipynb — Setup & Dataset Familiarization**
 
@@ -123,7 +123,7 @@ Observed patterns (from the recorded outputs):
                   removing several influential neighbors can change the predicted class (sometimes correcting it)
 
 
-##**What Has Been Completed (Current Status)**
+## **What Has Been Completed (Current Status)**
 
             **Modeling**
             
@@ -143,7 +143,7 @@ Observed patterns (from the recorded outputs):
             
                   Implemented and reported deletion fidelity and insertion fidelity on the explained node’s neighborhood.
 
-##**Environment**
+## **Environment**
 
             Example environment (as recorded):
             
@@ -153,7 +153,7 @@ Observed patterns (from the recorded outputs):
             
             PyG 2.7.0
 
-##**How to Run**
+## **How to Run**
 
             Install PyTorch and PyTorch Geometric following official instructions for your platform.
             
@@ -168,7 +168,7 @@ Observed patterns (from the recorded outputs):
                   Edge_Explainability.ipynb
 
 
-##**Next Steps (Possible Extensions)**
+## **Next Steps (Possible Extensions)**
 
 **1.The next extensions can be organized into three directions:**
 
@@ -283,9 +283,9 @@ LLMs can be added as a **post-processing, analysis, and reporting layer** to mak
       
       Important: the LLM does not decide correctness; it flags and organizes.
 
-##**a clear and defensible contribution:**
+## **a clear and defensible contribution:**
 
-##**LLM improves interpretability for humans, not model accuracy.**
+## **LLM improves interpretability for humans, not model accuracy.**
 
 
 
