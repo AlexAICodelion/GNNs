@@ -114,6 +114,7 @@ GCNConv是在每层把“邻居信息”混进来（邻域聚合）：AXW
 
 <img width="270" height="855" alt="image" src="https://github.com/user-attachments/assets/e255e522-fff7-4909-ab8b-e0e9cfb81bb8" />
 
+
 <img width="525" height="192" alt="image" src="https://github.com/user-attachments/assets/8f1ad6f0-fd42-4eea-8a87-76a5d3f8a737" />
 
 其实可以对比两个结果，前者为MLP，后者为GCN
@@ -121,8 +122,17 @@ GCNConv是在每层把“邻居信息”混进来（邻域聚合）：AXW
 <img width="549" height="192" alt="image" src="https://github.com/user-attachments/assets/0dd91cf0-03b6-4576-8f3b-d81edc9a5432" />  <img width="525" height="192" alt="image" src="https://github.com/user-attachments/assets/8f1ad6f0-fd42-4eea-8a87-76a5d3f8a737" />
 
 
+9、训练后的 GCN 输出可视化
 
+<img width="1182" height="1170" alt="image" src="https://github.com/user-attachments/assets/8f858c63-be5a-43af-b55e-2b7ba062bffe" />
 
+用训练好的 GCN 得到每个节点的 7 类 logits
+
+t-SNE 压到二维
+
+用真实标签上色
+
+直观看：不同类别形成更明显的区域/簇，比 MLP 更可分
 
 
 
