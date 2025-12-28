@@ -15,13 +15,13 @@ The project covers the following components:
       Model Evaluation and Results Analysis
 
 
-Project Structure:
+Project Structure:（see README1）
 
 1. Data Loading and Preprocessing:
 
 Using the torch-geometric library, we loaded the Cora dataset, a classic graph dataset containing 2708 nodes and 5429 edges, and performed preprocessing steps like feature normalization.
 
-2. Model Construction and Training:
+2. Model Construction and Training:（see README2）
 
 We implemented two models for the node classification task:
 
@@ -33,7 +33,7 @@ We implemented two models for the node classification task:
       
       GCN model uses graph convolutional layers (GCNConv) to aggregate information from neighboring nodes, and is suitable for graph-based data.
 
-3. Node-Level Explainability Analysis:
+3. Node-Level Explainability Analysis:（see README3）
 
 We performed the following steps to analyze node-level explainability:
 
@@ -45,7 +45,7 @@ We performed the following steps to analyze node-level explainability:
       
       Error Prediction Node Analysis: Compared correct and incorrect predictions to identify misleading features or neighbors.
 
-4. Optimizing Explainability:
+4. Optimizing Explainability:（see README3）
 
       Stable Insertion: This approach involves first extracting a 2-hop subgraph (nodes up to 2 hops away), and then retaining the most influential top-k edges. This helps to provide more stable and reliable explanations by reducing the noise that might come from removing too many edges.
       
