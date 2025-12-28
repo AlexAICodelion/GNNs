@@ -4,23 +4,23 @@ This repository documents a hands-on study of **Graph Neural Network (GNN) expla
 
 The workflow starts from training **MLP vs. GCN** as a baseline comparison, and then applies **post-hoc**,** mask-based explanations (PyG Explainer)** to interpret **node predictions** through both:
 
-            **Feature attributions** (node_mask)
+            Feature attributions (node_mask)
             
-            **Edge/neighbor attributions** (edge_mask)
+            Edge/neighbor attributions (edge_mask)
 
 In addition, the explanations are validated with **fidelity tests** (deletion/insertion), and compared on a **correctly predicted node** and a **misclassified node**.
 
 ## **Dataset**
 
-            **Cora (Planetoid)**
+            Cora (Planetoid)
             
-            Nodes:** 2708**
+            Nodes:2708
             
-            Edges: **10556** (PyG stores edges as directed pairs, so undirected links appear twice)
+            Edges: 10556 (PyG stores edges as directed pairs, so undirected links appear twice)
             
-            Node features: **1433**
+            Node features: 1433
             
-            Classes: **7**
+            Classes: 7
             
             Masks: train_mask, val_mask, test_mask
 
@@ -38,9 +38,9 @@ In addition, the explanations are validated with **fidelity tests** (deletion/in
 
             Implements and trains:
             
-            **MLP baseline**: two fully connected layers (no graph structure).
+            MLP baseline: two fully connected layers (no graph structure).
             
-           ** GCN model**: two GCNConv layers with neighbor aggregation (uses graph structure).
+            GCN model: two GCNConv layers with neighbor aggregation (uses graph structure).
             
             Typical training setup:
 
@@ -50,7 +50,7 @@ In addition, the explanations are validated with **fidelity tests** (deletion/in
                         
                         Training on train_mask, evaluation on test_mask
                         
-                        Example result: **Test Accuracy ≈ 0.814 (GCN)**
+                        Example result: Test Accuracy ≈ 0.814 (GCN)
 
 Also includes a 2D visualization (e.g., t-SNE/UMAP) of model outputs/embeddings to inspect class separability in representation space.
 
@@ -58,7 +58,7 @@ Also includes a 2D visualization (e.g., t-SNE/UMAP) of model outputs/embeddings 
    
 Uses PyG’s Explainer to explain a specific node prediction and outputs:
 
-            node_mask: importance over (**node × feature dimension**), shape (2708, 1433)
+            node_mask: importance over (node × feature dimension), shape (2708, 1433)
             
             edge_mask: importance over edges, shape (10556,)
 
@@ -70,9 +70,9 @@ A pairwise case study is performed:
 
 For each node, the notebook extracts:
 
-            **Top feature dimensions** (from node_mask) contributing to the node’s decision
+            Top feature dimensions (from node_mask) contributing to the node’s decision
             
-            **Top incident edges** (from edge_mask) contributing to the node’s decision
+            Top incident edges (from edge_mask) contributing to the node’s decision
 
 **4) Edge_Explainability.ipynb — Edge/Neighbor Explanation + Fidelity Validation**
 
@@ -98,13 +98,13 @@ Focuses on **edge-level explanations for node predictions**, including:
 
 **(c) Fidelity tests (deletion / insertion)**
 
-            **Deletion**: remove top-k important neighbors/edges and measure:
+            Deletion: remove top-k important neighbors/edges and measure:
             
                   confidence drop on the original predicted class
                   
                   whether the predicted class flips
             
-            **Insertion**: keep only top-k neighbors/edges and measure:
+            Insertion: keep only top-k neighbors/edges and measure:
 
                   whether the prediction can be reproduced with a small explanatory subgraph
 
@@ -125,13 +125,13 @@ Observed patterns (from the recorded outputs):
 
 ## **What Has Been Completed (Current Status)**
 
-            **Modeling**
+            Modeling
             
                   Trained MLP and GCN on Cora for node classification.
                   
                   Achieved a reasonable GCN performance (e.g., ~0.81 test accuracy).
             
-            **Explainability (Post-hoc)**
+            Explainability (Post-hoc)
             
                   Generated feature masks (node_mask) and extracted top feature dimensions for target nodes.
                   
@@ -139,7 +139,7 @@ Observed patterns (from the recorded outputs):
                   
                   Conducted a case study on one correct and one incorrect node (1709 vs 1708).
             
-            **Explanation Validation**
+            Explanation Validation
             
                   Implemented and reported deletion fidelity and insertion fidelity on the explained node’s neighborhood.
 
@@ -172,7 +172,7 @@ Observed patterns (from the recorded outputs):
 
 **1.The next extensions can be organized into three directions:**
 
-      **A. Explainer dimension (same model, different explainers)**
+      A. Explainer dimension (same model, different explainers)
       
             GNNExplainer (already used in this project)
       
@@ -182,13 +182,13 @@ Observed patterns (from the recorded outputs):
       
             GraphLIME (local linear surrogate, LIME-style explanations)
       
-      **B. Model architecture dimension (same explainer, different GNN)**
+      B. Model architecture dimension (same explainer, different GNN)
       
             GCN → GraphSAGE → GAT (attention provides an explainability signal, but note: attention ≠ explanation)
             
             Deeper GNNs + residual connections / JKNet (explanations may become more complex)
       
-      **C. Evaluation dimension (evaluation beyond fidelity)**
+      C. Evaluation dimension (evaluation beyond fidelity)
       
             Comprehensiveness / Sufficiency (common concepts in explainability literature)
             
@@ -225,7 +225,7 @@ LLMs can be added as a **post-processing, analysis, and reporting layer** to mak
 
 **A. LLM as an “Explanation Summarizer” (reporting layer)**
 
-      **Input to LLM (structured, no free-form):**
+      Input to LLM (structured, no free-form):
       
             node id, true label, predicted label, confidence
             
@@ -235,7 +235,7 @@ LLMs can be added as a **post-processing, analysis, and reporting layer** to mak
             
             deletion/insertion results (k, confidence drop, whether class flips)
 
-      **LLM outputs:**
+      LLM outputs:
 
             a concise narrative:
       
