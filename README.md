@@ -1,4 +1,4 @@
-**#GNN Explainability on Cora (PyTorch Geometric)**
+# **GNN Explainability on Cora (PyTorch Geometric)**
 
 This repository documents a hands-on study of **Graph Neural Network (GNN) explainability** on the Cora node classification benchmark using **PyTorch Geometric (PyG)**.
 
