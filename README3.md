@@ -1,1 +1,2 @@
-撒旦发射点广东省
+Related to gcn_explain.ipynb in code
+
