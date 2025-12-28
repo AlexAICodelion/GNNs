@@ -2,6 +2,16 @@ Related to Cora_MLP&GCN.ipynb（Cora）in code
 
 contents：
 
+            加载 Cora 图数据并确认图规模与 mask（半监督）
+            
+            用 t-SNE 可视化工具，准备观察表示空间
+            
+            建立 MLP 基线（只用特征，不用图）并训练/测试/可视化
+            
+            建立 GCN 模型（用图结构）并训练/测试/可视化
+            
+            通过 accuracy + t-SNE 直观结构 做 MLP vs GCN 对照
+
 
 PyG文档（GCNconv包）：https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.GCNConv.html#torch_geometric.nn.conv.GCNConv
 
