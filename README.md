@@ -19,7 +19,7 @@ Project Structure:（see README1）
 
 1. Data Loading and Preprocessing:
 
-Using the torch-geometric library, we loaded the Cora dataset, a classic graph dataset containing 2708 nodes and 5429 edges, and performed preprocessing steps like feature normalization.
+Using the torch-geometric library, we loaded the Cora dataset, a classic graph dataset containing 2708 nodes and 10556 edges, and performed preprocessing steps like feature normalization.
 
 2. Model Construction and Training:（see README2）
 
